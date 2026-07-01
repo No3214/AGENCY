@@ -13,6 +13,11 @@ function notFoundHtml(lang: string, csp: string): NextResponse {
 }
 
 export function middleware(request: NextRequest) {
+  // Payload admin/API manage their own headers — keep them out of the strict app CSP.
+  const pathname = request.nextUrl.pathname;
+  if (pathname.startsWith('/admin') || pathname.startsWith('/api')) {
+    return NextResponse.next();
+  }
   const nonce = btoa(crypto.randomUUID());
 
   const csp = [

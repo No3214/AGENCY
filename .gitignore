@@ -33,3 +33,9 @@ Thumbs.db
 .DS_Store
 
 .vercel
+
+# payload (local)
+*.db
+*.db-journal
+afterhouse.db
+cms/payload-types.ts
