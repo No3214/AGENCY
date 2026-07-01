@@ -27,6 +27,10 @@ export type Artist = {
   accent: [string, string]; // gradient stops for the monogram / hero
   socials: Social;
   mixes: Mix[];
+  setFormats?: string[];
+  pressQuotes?: { quote: string; source: string }[];
+  videoUrl?: string;
+  riderUrl?: string;
 };
 
 export type ShowStatus = 'confirmed' | 'holding' | 'limited' | 'sold' | 'past';

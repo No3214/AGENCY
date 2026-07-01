@@ -32,7 +32,7 @@ test('mobile menu toggles', async ({ page }) => {
   const burger = page.locator('.nav-burger');
   await expect(burger).toBeVisible();
   await burger.click();
-  await expect(page.getByRole('link', { name: 'Roster', exact: true })).toBeVisible();
+  await expect(page.locator('header.nav').getByRole('link', { name: 'Roster', exact: true })).toBeVisible();
 });
 
 test('Turkish dates page renders localized header', async ({ page }) => {

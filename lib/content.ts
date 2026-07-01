@@ -34,6 +34,7 @@ export const artists: Artist[] = [
     basedIn: 'İzmir, TR',
     accent: ['#E8B04B', '#C8881F'],
     socials: {},
+    setFormats: ['DJ set', 'Hybrid live'],
     mixes: [
       { title: 'Sunrise Terrace — Live Set', platform: 'soundcloud', url: '', duration: '62 min', genre: 'Afro House' },
       { title: 'After Hours 001', platform: 'soundcloud', url: '', duration: '74 min', genre: 'Melodic House' },
@@ -55,6 +56,7 @@ export const artists: Artist[] = [
     basedIn: 'Berlin, DE',
     accent: ['#7AA0FF', '#3F5BD1'],
     socials: {},
+    setFormats: ['DJ set'],
     mixes: [
       { title: 'Nightform — Club Mix', platform: 'soundcloud', url: '', duration: '68 min', genre: 'Melodic House' },
       { title: 'Pulse 02', platform: 'spotify', url: '', duration: '55 min', genre: 'Progressive' },
@@ -75,6 +77,7 @@ export const artists: Artist[] = [
     basedIn: 'İstanbul, TR',
     accent: ['#C9CDD6', '#6B7080'],
     socials: {},
+    setFormats: ['DJ set'],
     mixes: [{ title: 'Warehouse Transmission', platform: 'soundcloud', url: '', duration: '71 min', genre: 'Techno' }],
   },
   {
@@ -92,6 +95,7 @@ export const artists: Artist[] = [
     basedIn: 'Lisbon, PT',
     accent: ['#E79A6B', '#B5552F'],
     socials: {},
+    setFormats: ['DJ set'],
     mixes: [{ title: 'Golden Hour 01', platform: 'spotify', url: '', duration: '64 min', genre: 'Organic House' }],
   },
 ];

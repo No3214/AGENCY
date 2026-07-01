@@ -28,7 +28,7 @@ export const dict = {
     },
     board: { city: 'City', date: 'Date', artist: 'Artist', venue: 'Venue', status: 'Status', empty: 'New dates dropping soon.' },
     status: { confirmed: 'Confirmed', holding: 'On hold', limited: 'Limited', sold: 'Sold out', past: 'Played' },
-    artist: { based: 'Based in', genres: 'Genres', bio: 'Biography', mixes: 'Sets & mixes', dates: 'Upcoming dates', book: 'Book this artist', back: 'All artists' },
+    artist: { based: 'Based in', genres: 'Genres', bio: 'Biography', mixes: 'Sets & mixes', dates: 'Upcoming dates', book: 'Book this artist', back: 'All artists', formats: 'Formats', press: 'Press', watch: 'Watch', rider: 'Technical rider' },
     book: {
       title: 'Book an artist',
       sub: 'Real inquiries only — we reply within 48 hours.',
@@ -86,7 +86,7 @@ export const dict = {
     },
     board: { city: 'Şehir', date: 'Tarih', artist: 'Sanatçı', venue: 'Mekân', status: 'Durum', empty: 'Yeni tarihler çok yakında.' },
     status: { confirmed: 'Onaylı', holding: 'Opsiyon', limited: 'Sınırlı', sold: 'Tükendi', past: 'Çaldı' },
-    artist: { based: 'Üs', genres: 'Türler', bio: 'Biyografi', mixes: 'Setler & mixler', dates: 'Yaklaşan tarihler', book: 'Bu sanatçıyı booking yap', back: 'Tüm sanatçılar' },
+    artist: { based: 'Üs', genres: 'Türler', bio: 'Biyografi', mixes: 'Setler & mixler', dates: 'Yaklaşan tarihler', book: 'Bu sanatçıyı booking yap', back: 'Tüm sanatçılar', formats: 'Formatlar', press: 'Basın', watch: 'İzle', rider: 'Teknik rider' },
     book: {
       title: 'Sanatçı booking',
       sub: 'Sadece gerçek talepler — 48 saat içinde dönüyoruz.',
