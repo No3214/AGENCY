@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   icons: { icon: '/favicon.svg' },
 };
 
-export const viewport = { themeColor: '#0b0b0d' };
+export const viewport = { themeColor: '#0b0b0d', colorScheme: 'dark' as const };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const nonce = (await headers()).get('x-nonce') ?? undefined;

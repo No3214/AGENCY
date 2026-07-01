@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { getDict } from '../../../lib/i18n';
 import type { Locale } from '../../../lib/types';
-import BookingForm from '../../../components/BookingForm';
 import Reveal from '../../../components/Reveal';
+
+// Split the interactive form into its own chunk (loaded only on this route).
+const BookingForm = dynamic(() => import('../../../components/BookingForm'));
 
 export async function generateMetadata({
   params,
