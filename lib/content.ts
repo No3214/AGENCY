@@ -1,20 +1,21 @@
 import type { Artist, Show, Venue } from './types';
 
 // ---------------------------------------------------------------------------
-// BRAND
+// BRAND — rename here to rebrand the whole site.
 // ---------------------------------------------------------------------------
 export const brand = {
   name: 'AFTERHOUSE',
   short: 'AFTR',
   email: 'bookings@afterhouse.agency',
-  instagram: 'https://instagram.com/',
+  instagram: '', // set to a real profile URL to expose the Instagram link
   baseCity: 'İzmir',
 };
 
 // ---------------------------------------------------------------------------
 // ROSTER
-// Swap names, bios, socials and mixes with the real ones. `mixes[].embedUrl`
-// is optional — set it to a real SoundCloud/Spotify embed to render a player.
+// Put REAL data here. Empty socials / empty mix `url` render gracefully
+// (no dead links). Add a mix `embedUrl` to render a real SoundCloud/Spotify
+// player. `url` accepts a real track/set/profile link to make the card clickable.
 // ---------------------------------------------------------------------------
 export const artists: Artist[] = [
   {
@@ -32,15 +33,11 @@ export const artists: Artist[] = [
     genres: ['Afro House', 'Melodic House', 'Organic'],
     basedIn: 'İzmir, TR',
     accent: ['#E8B04B', '#C8881F'],
-    socials: {
-      instagram: 'https://instagram.com/',
-      soundcloud: 'https://soundcloud.com/',
-      spotify: 'https://open.spotify.com/',
-    },
+    socials: {},
     mixes: [
-      { title: 'Sunrise Terrace — Live Set', platform: 'soundcloud', url: 'https://soundcloud.com/', duration: '62 min', genre: 'Afro House' },
-      { title: 'After Hours 001', platform: 'soundcloud', url: 'https://soundcloud.com/', duration: '74 min', genre: 'Melodic House' },
-      { title: 'Aegean Nights (Promo Mix)', platform: 'spotify', url: 'https://open.spotify.com/', duration: '58 min', genre: 'Organic House' },
+      { title: 'Sunrise Terrace — Live Set', platform: 'soundcloud', url: '', duration: '62 min', genre: 'Afro House' },
+      { title: 'After Hours 001', platform: 'soundcloud', url: '', duration: '74 min', genre: 'Melodic House' },
+      { title: 'Aegean Nights (Promo Mix)', platform: 'spotify', url: '', duration: '58 min', genre: 'Organic House' },
     ],
   },
   {
@@ -57,10 +54,10 @@ export const artists: Artist[] = [
     genres: ['Melodic House', 'Progressive'],
     basedIn: 'Berlin, DE',
     accent: ['#7AA0FF', '#3F5BD1'],
-    socials: { instagram: 'https://instagram.com/', soundcloud: 'https://soundcloud.com/' },
+    socials: {},
     mixes: [
-      { title: 'Nightform — Club Mix', platform: 'soundcloud', url: 'https://soundcloud.com/', duration: '68 min', genre: 'Melodic House' },
-      { title: 'Pulse 02', platform: 'spotify', url: 'https://open.spotify.com/', duration: '55 min', genre: 'Progressive' },
+      { title: 'Nightform — Club Mix', platform: 'soundcloud', url: '', duration: '68 min', genre: 'Melodic House' },
+      { title: 'Pulse 02', platform: 'spotify', url: '', duration: '55 min', genre: 'Progressive' },
     ],
   },
   {
@@ -77,10 +74,8 @@ export const artists: Artist[] = [
     genres: ['Techno', 'Hard Groove'],
     basedIn: 'İstanbul, TR',
     accent: ['#C9CDD6', '#6B7080'],
-    socials: { instagram: 'https://instagram.com/', soundcloud: 'https://soundcloud.com/' },
-    mixes: [
-      { title: 'Warehouse Transmission', platform: 'soundcloud', url: 'https://soundcloud.com/', duration: '71 min', genre: 'Techno' },
-    ],
+    socials: {},
+    mixes: [{ title: 'Warehouse Transmission', platform: 'soundcloud', url: '', duration: '71 min', genre: 'Techno' }],
   },
   {
     slug: 'lunaria',
@@ -96,10 +91,8 @@ export const artists: Artist[] = [
     genres: ['Organic House', 'Downtempo'],
     basedIn: 'Lisbon, PT',
     accent: ['#E79A6B', '#B5552F'],
-    socials: { instagram: 'https://instagram.com/', spotify: 'https://open.spotify.com/' },
-    mixes: [
-      { title: 'Golden Hour 01', platform: 'spotify', url: 'https://open.spotify.com/', duration: '64 min', genre: 'Organic House' },
-    ],
+    socials: {},
+    mixes: [{ title: 'Golden Hour 01', platform: 'spotify', url: '', duration: '64 min', genre: 'Organic House' }],
   },
 ];
 
@@ -137,15 +130,11 @@ export function getArtist(slug: string): Artist | undefined {
 }
 
 export function upcomingShows(): Show[] {
-  return shows
-    .filter((s) => s.status !== 'past')
-    .sort((a, b) => a.date.localeCompare(b.date));
+  return shows.filter((s) => s.status !== 'past').sort((a, b) => a.date.localeCompare(b.date));
 }
 
 export function showsByArtist(slug: string): Show[] {
-  return shows
-    .filter((s) => s.artistSlug === slug && s.status !== 'past')
-    .sort((a, b) => a.date.localeCompare(b.date));
+  return shows.filter((s) => s.artistSlug === slug && s.status !== 'past').sort((a, b) => a.date.localeCompare(b.date));
 }
 
 export function artistName(slug: string): string {
@@ -154,9 +143,5 @@ export function artistName(slug: string): string {
 
 export function formatDate(iso: string, lang: 'en' | 'tr'): string {
   const d = new Date(iso + 'T00:00:00');
-  return d.toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', {
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-  });
+  return d.toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 }

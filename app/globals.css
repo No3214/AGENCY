@@ -286,3 +286,9 @@ h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.01em; }
 .skeleton { height: 320px; border-radius: var(--radius); background: linear-gradient(90deg, var(--bg-2), var(--bg-3), var(--bg-2)); background-size: 200% 100%; animation: sk 1.3s ease-in-out infinite; }
 @keyframes sk { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 main:focus { outline: none; }
+
+/* ---------- anti-bot honeypot + soon state ---------- */
+.hp { position: absolute !important; left: -9999px !important; top: auto; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
+.mix-soon { cursor: default; opacity: 0.82; }
+.mix-soon:hover { border-color: var(--line); background: var(--bg-2); }
+.mix-soon .mix-badge { color: var(--gold); border-color: rgba(232, 176, 75, 0.4); }

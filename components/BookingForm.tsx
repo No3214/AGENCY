@@ -8,6 +8,7 @@ import { artists } from '../lib/content';
 export default function BookingForm({ lang, preset }: { lang: Locale; preset?: string }) {
   const d = getDict(lang);
   const [state, setState] = useState<'idle' | 'sending' | 'ok' | 'err'>('idle');
+  const [ts] = useState(() => Date.now()); // page-load timestamp (anti-bot)
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,18 +33,30 @@ export default function BookingForm({ lang, preset }: { lang: Locale; preset?: s
 
   return (
     <form className="bform" onSubmit={onSubmit}>
+      {/* Honeypot: hidden from humans, tempting to bots. */}
+      <input
+        type="text"
+        name="company_website"
+        className="hp"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        defaultValue=""
+      />
+      <input type="hidden" name="_ts" value={ts} readOnly />
+
       <div className="bgrid">
         <label>
           {d.book.name}
-          <input name="name" required />
+          <input name="name" required maxLength={120} />
         </label>
         <label>
           {d.book.email}
-          <input name="email" type="email" required />
+          <input name="email" type="email" required maxLength={200} />
         </label>
         <label>
           {d.book.org}
-          <input name="org" />
+          <input name="org" maxLength={160} />
         </label>
         <label>
           {d.book.artist}
@@ -58,11 +71,11 @@ export default function BookingForm({ lang, preset }: { lang: Locale; preset?: s
         </label>
         <label>
           {d.book.city}
-          <input name="city" />
+          <input name="city" maxLength={120} />
         </label>
         <label>
           {d.book.country}
-          <input name="country" />
+          <input name="country" maxLength={120} />
         </label>
         <label>
           {d.book.date}
@@ -70,7 +83,7 @@ export default function BookingForm({ lang, preset }: { lang: Locale; preset?: s
         </label>
         <label>
           {d.book.budget}
-          <input name="budget" placeholder="3.000 – 6.000" />
+          <input name="budget" placeholder="3.000 – 6.000" maxLength={80} />
         </label>
         <label>
           {d.book.type}
@@ -86,7 +99,7 @@ export default function BookingForm({ lang, preset }: { lang: Locale; preset?: s
       </div>
       <label className="full">
         {d.book.message}
-        <textarea name="message" rows={5} required />
+        <textarea name="message" rows={5} required minLength={5} maxLength={4000} />
       </label>
       <button className="btn btn-gold" disabled={state === 'sending'}>
         {state === 'sending' ? d.book.sending : d.book.send}

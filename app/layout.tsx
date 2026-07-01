@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { headers } from 'next/headers';
 import { organizationLd, websiteLd, siteUrl } from '../lib/seo';
 import './globals.css';
 
@@ -25,7 +26,8 @@ export const metadata: Metadata = {
 
 export const viewport = { themeColor: '#0b0b0d' };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
   const ld = [organizationLd(), websiteLd()];
   return (
     <html lang="en">
@@ -38,6 +40,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
         />
       </head>
@@ -45,3 +48,5 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
+export const dynamic = 'force-dynamic';

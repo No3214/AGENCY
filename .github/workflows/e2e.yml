@@ -1,0 +1,22 @@
+name: E2E
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run E2E against production
+        run: npm run test:e2e
+        env:
+          PLAYWRIGHT_BASE_URL: https://agency-eight-kohl.vercel.app

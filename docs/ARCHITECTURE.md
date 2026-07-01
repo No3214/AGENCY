@@ -52,3 +52,37 @@ Component/E2E (Playwright) and visual regression are phase-2 additions.
 
 ## 9. CI
 `.github/workflows/ci.yml` runs `npm ci → build → test` on every push/PR to `main`.
+
+---
+
+## Updates (v1.1) — hardening pass
+
+These supersede notes in §7 and §8 above.
+
+### CSP with per-request nonce (§7 update)
+`middleware.ts` now issues a fresh nonce per request and sets a strict
+`Content-Security-Policy`: `script-src 'self' 'nonce-…' 'strict-dynamic'` — no
+more `'unsafe-inline'`/`'unsafe-eval'` for scripts. Next.js applies the nonce to
+its own scripts; our inline JSON-LD reads it via `headers().get('x-nonce')` in
+`app/layout.tsx`. `style-src` keeps `'unsafe-inline'` (required for inline style
+attributes used by the design system). Trade-off: reading `headers()` in the root
+layout opts pages into dynamic rendering (SSR) instead of static — acceptable and
+still edge-cached on Vercel. The other hardening headers stay static in
+`next.config.mjs`.
+
+### Booking anti-abuse (§4 update)
+`/api/book` now enforces: input validation + length caps + type coercion
+(`lib/booking.ts` → `sanitizeInquiry`), a hidden honeypot field, a
+minimum time-to-submit check, a link-stuffing heuristic, and a best-effort
+in-memory per-IP sliding-window rate limit (5 / 10 min). Bot/spam hits get a
+silent `{ ok: true }` (no detection signal leaked). For durable, multi-instance
+rate limiting, back it with Upstash/Vercel KV in phase 2. Logic is pure and
+unit-tested.
+
+### Testing (§8 update)
+- Unit: `tests/lib.test.ts`, `tests/booking.test.ts` (Vitest, node/jsdom).
+- Component: `tests/components.test.tsx` (Vitest + Testing Library + jsdom) for
+  Monogram, MixCard, ArtistCard, DatesBoard.
+- E2E: `tests/e2e/site.spec.ts` (Playwright) — redirect, hero, roster nav,
+  EN/TR toggle, artist EPK, booking submit. Runs against `PLAYWRIGHT_BASE_URL`
+  (defaults to production) via `.github/workflows/e2e.yml` (manual + weekly).

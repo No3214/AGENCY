@@ -30,7 +30,8 @@ Other scripts:
 | `npm run dev` | Dev server |
 | `npm run build` | Production build (also type-checks pages) |
 | `npm run typecheck` | `tsc --noEmit` (run after a build so `next-env.d.ts` exists) |
-| `npm test` | Unit tests (Vitest) |
+| `npm test` | Unit + component tests (Vitest) |
+| `npm run test:e2e` | End-to-end tests (Playwright) |
 | `npm start` | Serve the production build |
 
 ---
@@ -46,7 +47,8 @@ Other scripts:
 - **SEO**: per-page metadata, `sitemap.xml`, `robots.txt`, JSON-LD (Organization + WebSite), OpenGraph/Twitter
 - **Security**: hardening headers + Content-Security-Policy in `next.config.mjs`
 - **A11y**: skip link, semantic landmarks, focus-visible, `prefers-reduced-motion`
-- **Tests**: Vitest unit suite for the content/i18n logic
+- **Tests**: Vitest unit + component suites, Playwright E2E
+- **Security**: per-request nonce CSP (middleware) + booking anti-spam (honeypot, timing, rate limit)
 - **CI**: GitHub Actions (`.github/workflows/ci.yml`) → build + tests
 
 ---
