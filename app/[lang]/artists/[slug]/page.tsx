@@ -11,6 +11,9 @@ import DatesBoard from '../../../../components/DatesBoard';
 import Reveal from '../../../../components/Reveal';
 import JsonLd from '../../../../components/JsonLd';
 
+// Only the known artist slugs are valid — everything else is a hard 404 (good for SEO).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return locales.flatMap((lang) => artists.map((a) => ({ lang, slug: a.slug })));
 }
